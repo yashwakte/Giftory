@@ -1,0 +1,17 @@
+.shop-container {
+  padding: 2rem 1rem;
+  h1 {
+    color: #ff4d4d;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}

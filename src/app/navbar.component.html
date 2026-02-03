@@ -1,0 +1,21 @@
+<nav class="navbar">
+  <div class="logo">
+    <a routerLink="/">
+      <div class="navbar-logo brand-text">Giftory</div>
+    </a>
+  </div>
+  <div class="hamburger" [class.open]="showMobileNav" (click)="showMobileNav = !showMobileNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="nav-links" [class.open]="showMobileNav">
+    <li><a routerLink="/shop" (click)="showMobileNav = false">Shop All</a></li>
+    <li><a routerLink="/category/birthday" (click)="showMobileNav = false">Birthday</a></li>
+    <li><a routerLink="/category/anniversary" (click)="showMobileNav = false">Anniversary</a></li>
+    <li><a routerLink="/category/for-him" (click)="showMobileNav = false">For Him</a></li>
+    <li><a routerLink="/category/for-her" (click)="showMobileNav = false">For Her</a></li>
+    <li><a routerLink="/category/personalized" (click)="showMobileNav = false">Personalized</a></li>
+    <li><a routerLink="/cart" (click)="showMobileNav = false">Cart</a></li>
+  </ul>
+</nav>
