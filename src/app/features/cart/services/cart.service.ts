@@ -1,33 +1,43 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { CartItem } from '../models/cart-item.model';
 import { CustomHamper } from '../../shop/models/hamper.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private items: CartItem[] = [];
+  private items = signal<CartItem[]>([]);
+
+  // Computed values
+  cartItems = this.items.asReadonly();
+
+  itemCount = computed(() => {
+    return this.items().reduce((sum, item) => sum + item.quantity, 0);
+  });
+
+  totalAmount = computed(() => {
+    return this.items().reduce((sum, item) => sum + item.price * item.quantity, 0);
+  });
 
   getItems(): CartItem[] {
-    return this.items;
+    return this.items();
   }
 
   updateQuantity(productId: number, quantity: number): void {
     const nextQty = Math.max(1, quantity);
-    const item = this.items.find((i) => i.productId === productId);
-    if (!item) {
-      return;
-    }
-    item.quantity = nextQty;
+    this.items.update((items) => {
+      const item = items.find((i) => i.productId === productId);
+      if (item) {
+        item.quantity = nextQty;
+      }
+      return [...items];
+    });
   }
 
   removeItem(productId: number): void {
-    const index = this.items.findIndex((i) => i.productId === productId);
-    if (index >= 0) {
-      this.items.splice(index, 1);
-    }
+    this.items.update((items) => items.filter((i) => i.productId !== productId));
   }
 
   addItem(item: CartItem): void {
-    this.items.push(item);
+    this.items.update((items) => [...items, item]);
   }
 
   /**
@@ -47,24 +57,24 @@ export class CartService {
       hamperData: hamper,
     };
 
-    this.items.push(hamperCartItem);
+    this.items.update((items) => [...items, hamperCartItem]);
   }
 
   /**
    * Get only hamper items from cart
    */
   getHampers(): CartItem[] {
-    return this.items.filter((item) => item.isHamper);
+    return this.items().filter((item) => item.isHamper);
   }
 
   /**
    * Get only regular product items from cart
    */
   getRegularItems(): CartItem[] {
-    return this.items.filter((item) => !item.isHamper);
+    return this.items().filter((item) => !item.isHamper);
   }
 
   clearCart(): void {
-    this.items = [];
+    this.items.set([]);
   }
 }

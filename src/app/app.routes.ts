@@ -7,17 +7,29 @@ import { CheckoutComponent } from './features/checkout/checkout.component';
 import { AboutComponent } from './features/about/about.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { WishlistComponent } from './features/wishlist/wishlist.component';
+import { HamperBuilderComponent } from './features/shop/hamper-builder.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'shop', component: ShopComponent },
+  { path: 'hamper-builder', component: HamperBuilderComponent },
   { path: 'category/birthday', component: ShopComponent },
   { path: 'category/anniversary', component: ShopComponent },
   { path: 'category/for-him', component: ShopComponent },
   { path: 'category/for-her', component: ShopComponent },
   { path: 'category/personalized', component: ShopComponent },
+  { path: 'category/boyfriend', component: ShopComponent },
+  { path: 'category/girlfriend', component: ShopComponent },
+  { path: 'category/husband', component: ShopComponent },
+  { path: 'category/wife', component: ShopComponent },
+  { path: 'category/father', component: ShopComponent },
+  { path: 'category/mother', component: ShopComponent },
+  { path: 'category/best-friend', component: ShopComponent },
+  { path: 'category/colleague', component: ShopComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'wishlist', component: WishlistComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'about', component: AboutComponent },

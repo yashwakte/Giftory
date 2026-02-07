@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +19,20 @@ export class HamperBuilderComponent implements OnInit {
   availableProducts = signal<Product[]>([]);
   hamperSizes = HAMPER_SIZES;
   giftWrapTiers = GIFT_WRAP_TIERS;
+
+  // Pagination
+  currentPage = signal<number>(1);
+  itemsPerPage = 16;
+
+  // Paginated products
+  paginatedProducts = computed(() => {
+    const products = this.availableProducts();
+    const startIndex = (this.currentPage() - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return products.slice(startIndex, endIndex);
+  });
+
+  totalPages = computed(() => Math.ceil(this.availableProducts().length / this.itemsPerPage));
 
   // Form fields
   customName = signal<string>('My Custom Hamper');
@@ -144,5 +158,58 @@ export class HamperBuilderComponent implements OnInit {
       this.giftMessage.set('');
       this.recipientName.set('');
     }
+  }
+
+  // Pagination methods
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+      // Scroll to top of products section
+      document.querySelector('.products-column')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage() < this.totalPages()) {
+      this.goToPage(this.currentPage() + 1);
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage() > 1) {
+      this.goToPage(this.currentPage() - 1);
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const total = this.totalPages();
+    const current = this.currentPage();
+    const pages: number[] = [];
+
+    if (total <= 7) {
+      // Show all pages if 7 or fewer
+      for (let i = 1; i <= total; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Show first page, last page, current page and surrounding pages
+      pages.push(1);
+
+      if (current > 3) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+
+      for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+        pages.push(i);
+      }
+
+      if (current < total - 2) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+
+      pages.push(total);
+    }
+
+    return pages;
   }
 }

@@ -22,9 +22,6 @@
             <h3>Order summary</h3>
             <p class="helper">Review items and charges before paying.</p>
           </div>
-          <button type="button" class="coupon-link" (click)="toggleCouponModal()">
-            Apply coupon
-          </button>
         </div>
 
         @if (items.length) {
@@ -78,21 +75,6 @@
           <div class="summary-row">
             <span>Delivery</span>
             <span>₹{{ deliveryFee | number: '1.0-0' }}</span>
-          </div>
-          <div class="coupon-cta">
-            <div>
-              <p class="coupon-cta-title">
-                {{ discountPercent > 0 ? 'Coupon applied' : 'Have a coupon?' }}
-              </p>
-              @if (discountPercent > 0) {
-                <p class="coupon-cta-note">{{ appliedCoupon }} is active. You can change it.</p>
-              } @else {
-                <p class="coupon-cta-note">Tap apply to add Flat10 / Flat15 / Flat30.</p>
-              }
-            </div>
-            <button type="button" class="coupon-cta-btn" (click)="toggleCouponModal()">
-              {{ discountPercent > 0 ? 'Change coupon' : 'Apply coupon' }}
-            </button>
           </div>
           @if (discountPercent > 0) {
             <div class="summary-row discount">

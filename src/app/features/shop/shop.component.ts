@@ -20,6 +20,8 @@ export class ShopComponent implements OnInit {
   currentCategory = signal<string>('');
   searchQuery = signal<string>('');
   sortBy = signal<string>('name');
+  currentPage = signal<number>(1);
+  itemsPerPage = 12;
 
   // Check if we're in personalized category (hamper builder mode)
   isPersonalizedCategory = computed(() => this.currentCategory() === 'personalized');
@@ -54,6 +56,16 @@ export class ShopComponent implements OnInit {
     return products;
   });
 
+  // Paginated products
+  paginatedProducts = computed(() => {
+    const products = this.filteredProducts();
+    const startIndex = (this.currentPage() - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return products.slice(startIndex, endIndex);
+  });
+
+  totalPages = computed(() => Math.ceil(this.filteredProducts().length / this.itemsPerPage));
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -80,10 +92,18 @@ export class ShopComponent implements OnInit {
     if (!category) return 'All Gifts';
 
     const titles: { [key: string]: string } = {
-      birthday: 'Birthday Gifts',
-      anniversary: 'Anniversary Gifts',
-      'for-him': 'Gifts For Him',
-      'for-her': 'Gifts For Her',
+      birthday: "Perfect gifts for 'Birthday'",
+      anniversary: "Perfect gifts for 'Anniversary'",
+      'for-him': "Perfect gifts for 'Him'",
+      'for-her': "Perfect gifts for 'Her'",
+      boyfriend: "Perfect gifts for 'Boyfriend'",
+      girlfriend: "Perfect gifts for 'Girlfriend'",
+      husband: "Perfect gifts for 'Husband'",
+      wife: "Perfect gifts for 'Wife'",
+      father: "Perfect gifts for 'Father'",
+      mother: "Perfect gifts for 'Mother'",
+      'best-friend': "Perfect gifts for 'Best Friend'",
+      colleague: "Perfect gifts for 'Colleague'",
       personalized: 'Personalized Gifts',
     };
 
@@ -128,9 +148,63 @@ export class ShopComponent implements OnInit {
 
   onSearchChange(value: string): void {
     this.searchQuery.set(value);
+    this.currentPage.set(1); // Reset to first page when searching
   }
 
   onSortChange(value: string): void {
     this.sortBy.set(value);
+    this.currentPage.set(1); // Reset to first page when sorting
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+      // Scroll to top of products
+      document.querySelector('.shop-header')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage() < this.totalPages()) {
+      this.goToPage(this.currentPage() + 1);
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage() > 1) {
+      this.goToPage(this.currentPage() - 1);
+    }
+  }
+
+  getPageNumbers(): number[] {
+    const total = this.totalPages();
+    const current = this.currentPage();
+    const pages: number[] = [];
+
+    if (total <= 7) {
+      // Show all pages if 7 or fewer
+      for (let i = 1; i <= total; i++) {
+        pages.push(i);
+      }
+    } else {
+      // Show first page, last page, current page and surrounding pages
+      pages.push(1);
+
+      if (current > 3) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+
+      for (let i = Math.max(2, current - 1); i <= Math.min(total - 1, current + 1); i++) {
+        pages.push(i);
+      }
+
+      if (current < total - 2) {
+        pages.push(-1); // -1 represents ellipsis
+      }
+
+      pages.push(total);
+    }
+
+    return pages;
   }
 }

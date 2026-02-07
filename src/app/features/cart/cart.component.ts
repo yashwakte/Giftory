@@ -4,6 +4,8 @@ import { CartItem } from './models/cart-item.model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { WishlistService } from '../../shared/services/wishlist.service';
+import { ProductService } from '../shop/services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +17,8 @@ import { RouterModule } from '@angular/router';
 export class CartComponent {
   private cartService = inject(CartService);
   private router = inject(Router);
+  wishlistService = inject(WishlistService);
+  private productService = inject(ProductService);
 
   items: CartItem[] = [];
   expandedHampers = signal<Set<number>>(new Set());
@@ -77,5 +81,30 @@ export class CartComponent {
   private persistCart() {
     this.cartService.clearCart();
     this.items.forEach((i) => this.cartService.addItem(i));
+  }
+
+  moveToWishlist(item: CartItem): void {
+    // Find the product from the product service
+    const product = this.productService.getProductById(item.productId);
+    if (product) {
+      this.wishlistService.addToWishlist(product);
+      this.removeItem(item);
+    }
+  }
+
+  moveToCart(productId: number): void {
+    const product = this.productService.getProductById(productId);
+    if (product) {
+      this.cartService.addItem({
+        productId: product.id,
+        productName: product.name,
+        price: product.price,
+        quantity: 1,
+        imageUrl: product.imageUrl,
+        isHamper: false,
+      });
+      this.wishlistService.removeFromWishlist(productId);
+      this.items = this.cartService.getItems();
+    }
   }
 }

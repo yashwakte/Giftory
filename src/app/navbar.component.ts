@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from './features/cart/services/cart.service';
+import { WishlistService } from './shared/services/wishlist.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +13,8 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
+  cartService = inject(CartService);
+  wishlistService = inject(WishlistService);
   showMobileNav = false;
   activeDropdown: string | null = null;
 

@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-interface ProfilePerk {
-  title: string;
-  copy: string;
-}
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,18 +12,37 @@ interface ProfilePerk {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {
-  readonly perks: ProfilePerk[] = [
-    {
-      title: 'Order history',
-      copy: 'Track every order, download invoices, and request support from one place.',
-    },
-    {
-      title: 'Saved addresses',
-      copy: 'Checkout in seconds with verified addresses and preferred delivery instructions.',
-    },
-    {
-      title: 'Wishlist & gifting',
-      copy: 'Save ideas, share with loved ones, and get personalised recommendations.',
-    },
-  ];
+  userService = inject(UserService);
+
+  getStatusColor(status: string): string {
+    const colors: Record<string, string> = {
+      delivered: '#10b981',
+      'in-transit': '#3b82f6',
+      processing: '#f59e0b',
+      cancelled: '#ef4444',
+    };
+    return colors[status] || '#6b7280';
+  }
+
+  getStatusLabel(status: string): string {
+    const labels: Record<string, string> = {
+      delivered: 'Delivered',
+      'in-transit': 'In Transit',
+      processing: 'Processing',
+      cancelled: 'Cancelled',
+    };
+    return labels[status] || status;
+  }
+
+  formatDate(date: Date): string {
+    return new Intl.DateTimeFormat('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(new Date(date));
+  }
+
+  setDefaultAddress(id: string): void {
+    this.userService.setDefaultAddress(id);
+  }
 }
