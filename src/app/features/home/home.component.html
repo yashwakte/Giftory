@@ -183,7 +183,7 @@
     <div class="category-grid" id="occasion-category-grid">
       @for (cat of occasionCategories; track cat.label) {
         <div class="category-card" (click)="navigateToCategory(cat.route)">
-          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <img [src]="cat.icon" [alt]="cat.label" class="category-image" />
           <div class="category-label">{{ cat.label }}</div>
         </div>
       }
@@ -211,7 +211,7 @@
     <div class="category-grid" id="relationship-category-grid">
       @for (cat of relationshipCategories; track cat.label) {
         <div class="category-card" (click)="navigateToCategory(cat.route)">
-          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <img [src]="cat.icon" [alt]="cat.label" class="category-image" />
           <div class="category-label">{{ cat.label }}</div>
         </div>
       }
@@ -239,7 +239,7 @@
     <div class="category-grid" id="festival-category-grid">
       @for (cat of festivalCategories; track cat.label) {
         <div class="category-card" (click)="navigateToCategory(cat.route)">
-          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <img [src]="cat.icon" [alt]="cat.label" class="category-image" />
           <div class="category-label">{{ cat.label }}</div>
         </div>
       }

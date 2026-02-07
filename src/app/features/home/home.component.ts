@@ -26,36 +26,44 @@ export class HomeComponent implements OnInit {
   personalizedGifts = signal<Product[]>([]);
 
   occasionCategories = [
-    { label: "Valentine's Day", route: '/shop' },
-    { label: 'Birthday', route: '/category/birthday' },
-    { label: 'Anniversary', route: '/category/anniversary' },
-    { label: 'Wedding', route: '/shop' },
-    { label: "Father's Day", route: '/shop' },
-    { label: "Mother's Day", route: '/shop' },
-    { label: 'Friendship Day', route: '/shop' },
+    { label: "Valentine's Day", route: '/shop', icon: 'assets/occasions/valentines-day.svg' },
+    { label: 'Birthday', route: '/category/birthday', icon: 'assets/occasions/birthday.svg' },
+    {
+      label: 'Anniversary',
+      route: '/category/anniversary',
+      icon: 'assets/occasions/anniversary.svg',
+    },
+    { label: 'Wedding', route: '/shop', icon: 'assets/occasions/wedding.svg' },
+    { label: "Father's Day", route: '/shop', icon: 'assets/occasions/fathers-day.svg' },
+    { label: "Mother's Day", route: '/shop', icon: 'assets/occasions/mothers-day.svg' },
+    { label: 'Friendship Day', route: '/shop', icon: 'assets/occasions/friendship-day.svg' },
   ];
 
   relationshipCategories = [
-    { label: 'Boyfriend', route: '/category/for-him' },
-    { label: 'Girlfriend', route: '/category/for-her' },
-    { label: 'Husband', route: '/category/for-him' },
-    { label: 'Wife', route: '/category/for-her' },
-    { label: 'Best Friend', route: '/shop' },
-    { label: 'Casual Friend', route: '/shop' },
-    { label: 'Colleague', route: '/shop' },
-    { label: 'Clients', route: '/shop' },
-    { label: 'Father', route: '/category/for-him' },
-    { label: 'Mother', route: '/category/for-her' },
+    { label: 'Boyfriend', route: '/category/for-him', icon: 'assets/relationships/boyfriend.svg' },
+    {
+      label: 'Girlfriend',
+      route: '/category/for-her',
+      icon: 'assets/relationships/girlfriend.svg',
+    },
+    { label: 'Husband', route: '/category/for-him', icon: 'assets/relationships/husband.svg' },
+    { label: 'Wife', route: '/category/for-her', icon: 'assets/relationships/wife.svg' },
+    { label: 'Best Friend', route: '/shop', icon: 'assets/relationships/best-friend.svg' },
+    { label: 'Casual Friend', route: '/shop', icon: 'assets/relationships/casual-friend.svg' },
+    { label: 'Colleague', route: '/shop', icon: 'assets/relationships/colleague.svg' },
+    { label: 'Clients', route: '/shop', icon: 'assets/relationships/clients.svg' },
+    { label: 'Father', route: '/category/for-him', icon: 'assets/relationships/father.svg' },
+    { label: 'Mother', route: '/category/for-her', icon: 'assets/relationships/mother.svg' },
   ];
 
   festivalCategories = [
-    { label: 'Holi', route: '/shop' },
-    { label: 'Diwali', route: '/shop' },
-    { label: 'Mahashivratri', route: '/shop' },
-    { label: 'Chaturthi', route: '/shop' },
-    { label: 'Christmas', route: '/shop' },
-    { label: 'Rakhi', route: '/shop' },
-    { label: 'Eid', route: '/shop' },
+    { label: 'Holi', route: '/shop', icon: 'assets/festivals/holi.svg' },
+    { label: 'Diwali', route: '/shop', icon: 'assets/festivals/diwali.svg' },
+    { label: 'Mahashivratri', route: '/shop', icon: 'assets/festivals/mahashivratri.svg' },
+    { label: 'Chaturthi', route: '/shop', icon: 'assets/festivals/chaturthi.svg' },
+    { label: 'Christmas', route: '/shop', icon: 'assets/festivals/christmas.svg' },
+    { label: 'Rakhi', route: '/shop', icon: 'assets/festivals/rakhi.svg' },
+    { label: 'Eid', route: '/shop', icon: 'assets/festivals/eid.svg' },
   ];
 
   categories: CategoryItem[] = [

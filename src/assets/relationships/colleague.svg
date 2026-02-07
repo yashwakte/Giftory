@@ -1,0 +1,41 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="colbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#eceff1"/>
+      <stop offset="100%" stop-color="#b0bec5"/>
+    </linearGradient>
+    <linearGradient id="colsuit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#546e7a"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </linearGradient>
+    <filter id="colshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#colbg)"/>
+  <ellipse cx="200" cy="230" rx="130" ry="25" fill="rgba(0,0,0,0.06)"/>
+  <g filter="url(#colshadow)">
+    <ellipse cx="200" cy="70" rx="38" ry="40" fill="#d4a574"/>
+    <path d="M 168 55 Q 178 48 188 52 Q 198 45 208 52 Q 218 48 228 55" fill="#3e2723" stroke="#2c1810" stroke-width="1.5"/>
+    <ellipse cx="185" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <ellipse cx="215" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <path d="M 193 78 Q 200 82 207 78" stroke="#b68655" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <rect x="173" y="92" width="54" height="8" rx="4" fill="#c62828"/>
+    <path d="M 165 100 Q 160 145 168 180 L 163 200 L 237 200 L 232 180 Q 240 145 235 100" fill="url(#colsuit)"/>
+    <rect x="185" y="110" width="30" height="70" fill="#90caf9" opacity="0.9"/>
+    <circle cx="200" cy="125" r="4" fill="#263238"/>
+    <circle cx="200" cy="140" r="4" fill="#263238"/>
+    <circle cx="200" cy="155" r="4" fill="#263238"/>
+    <path d="M 165 100 L 175 113 L 165 126" fill="#607d8b"/>
+    <path d="M 235 100 L 225 113 L 235 126" fill="#607d8b"/>
+    <rect x="270" y="95" width="60" height="50" rx="4" fill="#78909c"/>
+    <rect x="275" y="100" width="50" height="40" fill="#eceff1"/>
+    <path d="M 280 110 L 285 110 L 288 120 L 280 120 Z" fill="#ff7043"/>
+    <path d="M 295 110 L 300 110 L 303 120 L 295 120 Z" fill="#66bb6a"/>
+    <path d="M 310 110 L 315 110 L 318 120 L 310 120 Z" fill="#42a5f5"/>
+    <text x="300" y="135" font-family="Arial" font-size="8" fill="#37474f" text-anchor="middle" font-weight="bold">CHART</text>
+  </g>
+</svg>

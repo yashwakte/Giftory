@@ -1,0 +1,40 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0f2f1"/>
+      <stop offset="100%" stop-color="#80cbc4"/>
+    </linearGradient>
+    <linearGradient id="hsuit" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#37474f"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+    <filter id="hshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#hbg)"/>
+  <ellipse cx="200" cy="230" rx="130" ry="25" fill="rgba(0,0,0,0.06)"/>
+  <g filter="url(#hshadow)">
+    <ellipse cx="200" cy="70" rx="40" ry="42" fill="#d4a574"/>
+    <path d="M 168 55 Q 178 48 188 52 Q 198 45 208 52 Q 218 48 228 55 L 225 62" fill="#3e2723" stroke="#2c1810" stroke-width="1.5"/>
+    <ellipse cx="185" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <ellipse cx="215" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <path d="M 193 78 Q 200 82 207 78" stroke="#b68655" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <rect x="170" y="92" width="60" height="8" rx="4" fill="#795548"/>
+    <path d="M 165 100 Q 160 145 168 180 L 163 200 L 237 200 L 232 180 Q 240 145 235 100" fill="url(#hsuit)"/>
+    <rect x="185" y="110" width="30" height="65" fill="#ffffff" opacity="0.9"/>
+    <circle cx="200" cy="125" r="4" fill="#37474f"/>
+    <circle cx="200" cy="140" r="4" fill="#37474f"/>
+    <circle cx="200" cy="155" r="4" fill="#37474f"/>
+    <path d="M 193 100 L 200 125 L 207 100" fill="#c62828" stroke="#b71c1c" stroke-width="1.5"/>
+    <path d="M 165 100 L 175 115 L 165 130" fill="#455a64"/>
+    <path d="M 235 100 L 225 115 L 235 130" fill="#455a64"/>
+    <circle cx="260" cy="110" r="28" fill="rgba(255,215,0,0.9)" stroke="#daa520" stroke-width="3"/>
+    <circle cx="260" cy="110" r="18" fill="none" stroke="#b8860b" stroke-width="4"/>
+    <path d="M 260 100 L 252 110 L 260 115 L 268 110 Z" fill="rgba(255,255,255,0.6)"/>
+    <path d="M 245 125 Q 260 135 275 125" stroke="#daa520" stroke-width="2" fill="none"/>
+  </g>
+</svg>

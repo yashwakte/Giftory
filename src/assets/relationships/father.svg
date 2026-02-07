@@ -1,0 +1,40 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e3f2fd"/>
+      <stop offset="100%" stop-color="#90caf9"/>
+    </linearGradient>
+    <linearGradient id="fshirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c8cce"/>
+      <stop offset="100%" stop-color="#3a5a8c"/>
+    </linearGradient>
+    <filter id="fshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#fbg)"/>
+  <ellipse cx="200" cy="230" rx="130" ry="24" fill="rgba(0,0,0,0.06)"/>
+  <g filter="url(#fshadow)">
+    <ellipse cx="200" cy="72" rx="38" ry="40" fill="#d4a574"/>
+    <path d="M 170 56 Q 180 48 190 54 Q 200 48 210 54 Q 220 48 230 56" fill="#656565" stroke="#3e3e3e" stroke-width="1.5"/>
+    <ellipse cx="185" cy="68" rx="4" ry="5" fill="#2c1810"/>
+    <ellipse cx="215" cy="68" rx="4" ry="5" fill="#2c1810"/>
+    <path d="M 192 80 Q 200 84 208 80" stroke="#b68655" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 175 88 L 195 84 L 205 84 L 225 88" stroke="#656565" stroke-width="3" fill="none"/>
+    <rect x="175" y="97" width="50" height="6" rx="3" fill="#7a5a4a"/>
+    <path d="M 165 103 Q 160 148 168 180 L 163 200 L 237 200 L 232 180 Q 240 148 235 103" fill="url(#fshirt)"/>
+    <rect x="185" y="113" width="30" height="65" fill="#64b5f6" opacity="0.2"/>
+    <circle cx="200" cy="128" r="4" fill="#ffffff"/>
+    <circle cx="200" cy="143" r="4" fill="#ffffff"/>
+    <circle cx="200" cy="158" r="4" fill="#ffffff"/>
+    <path d="M 165 103 L 175 116 L 165 129" fill="#37474f"/>
+    <path d="M 235 103 L 225 116 L 235 129" fill="#37474f"/>
+    <circle cx="290" cy="110" r="20" fill="#ff6b6b" opacity="0.8">
+      <animate attributeName="r" values="20;24;20" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M 290 95 Q 280 110 290 120 Q 300 110 290 95" fill="#ff6b6b"/>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wfbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff9e6"/>
+      <stop offset="100%" stop-color="#ffe0b3"/>
+    </linearGradient>
+    <linearGradient id="wfdress" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffab91"/>
+      <stop offset="100%" stop-color="#ff7043"/>
+    </linearGradient>
+    <filter id="wfshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#wfbg)"/>
+  <ellipse cx="200" cy="230" rx="130" ry="25" fill="rgba(0,0,0,0.06)"/>
+  <g filter="url(#wfshadow)">
+    <ellipse cx="200" cy="70" rx="38" ry="40" fill="#f4d4bc"/>
+    <path d="M 168 55 Q 178 48 188 54 L 192 48 L 200 45 L 208 48 L 212 54 Q 222 48 232 55" fill="#5d4037" stroke="#3e2723" stroke-width="1.5"/>
+    <ellipse cx="185" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <ellipse cx="215" cy="66" rx="5" ry="6" fill="#2c1810"/>
+    <path d="M 192 78 Q 200 82 208 78" stroke="#c9a985" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="178" cy="80" r="6" fill="#ff8a80" opacity="0.6"/>
+    <circle cx="222" cy="80" r="6" fill="#ff8a80" opacity="0.6"/>
+    <path d="M 170 92 Q 158 138 165 175 L 160 200 L 240 200 L 235 175 Q 242 138 230 92" fill="url(#wfdress)"/>
+    <ellipse cx="200" cy="115" rx="30" ry="26" fill="rgba(255,255,255,0.15)"/>
+    <circle cx="140" cy="105" r="28" fill="rgba(255,215,0,0.9)" stroke="#daa520" stroke-width="3"/>
+    <circle cx="140" cy="105" r="18" fill="none" stroke="#b8860b" stroke-width="4"/>
+    <path d="M 140 95 L 132 105 L 140 110 L 148 105 Z" fill="rgba(255,255,255,0.6)"/>
+    <path d="M 125 120 Q 140 130 155 120" stroke="#daa520" stroke-width="2" fill="none"/>
+    <g opacity="0.6">
+      <circle cx="290" cy="90" r="8" fill="#ffeb3b"/>
+      <circle cx="305" cy="100" r="6" fill="#ffeb3b"/>
+      <circle cx="280" cy="105" r="7" fill="#ffeb3b"/>
+    </g>
+  </g>
+</svg>
