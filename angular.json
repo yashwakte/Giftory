@@ -87,6 +87,13 @@
             }
           },
           "defaultConfiguration": "development"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/Gifting/",
+            "buildTarget": "gifting-ecommerce:build:production"
+          }
         }
       }
     }
