@@ -1,0 +1,47 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shivbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0f7fa"/>
+      <stop offset="50%" stop-color="#80deea"/>
+      <stop offset="100%" stop-color="#00acc1"/>
+    </linearGradient>
+    <radialGradient id="shivglow" cx="0.5" cy="0.3">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#b3e5fc"/>
+      <stop offset="100%" stop-color="#0277bd"/>
+    </radialGradient>
+    <filter id="shivshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#shivbg)"/>
+  <g filter="url(#shivshadow)">
+    <ellipse cx="200" cy="200" rx="45" ry="18" fill="#607d8b" opacity="0.5"/>
+    <ellipse cx="200" cy="180" rx="40" ry="12" fill="#78909c"/>
+    <path d="M 160 180 Q 165 140 180 128 L 190 100 L 200 85 L 210 100 L 220 128 Q 235 140 240 180" fill="url(#shivglow)"/>
+    <circle cx="200" cy="60" r="28" fill="#ffeb3b" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;1;0.85" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M 195 45 L 200 25 L 205 45 M 200 25 Q 185 30 180 45 M 200 25 Q 215 30 220 45" stroke="#ff9800" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="200" cy="105" r="22" fill="#b3e5fc"/>
+    <circle cx="188" cy="102" r="4" fill="#0277bd"/>
+    <circle cx="212" cy="102" r="4" fill="#0277bd"/>
+    <path d="M 193 113 Q 200 116 207 113" stroke="#01579b" stroke-width="2" fill="none"/>
+    <rect x="175" y="120" width="50" height="3" fill="#ffab00"/>
+    <circle cx="185" cy="122" r="3" fill="#ff6f00"/>
+    <circle cx="195" cy="122" r="3" fill="#ff6f00"/>
+    <circle cx="205" cy="122" r="3" fill="#ff6f00"/>
+    <circle cx="215" cy="122" r="3" fill="#ff6f00"/>
+    <g transform="translate(165, 145)">
+      <path d="M 0 0 Q 5 25 0 45" stroke="#8d6e63" stroke-width="4" fill="none"/>
+      <ellipse cx="0" cy="45" rx="6" ry="8" fill="#6d4c41"/>
+    </g>
+    <g transform="translate(235, 145)">
+      <path d="M 0 0 Q -5 25 0 45" stroke="#8d6e63" stroke-width="4" fill="none"/>
+      <ellipse cx="0" cy="45" rx="6" ry="8" fill="#6d4c41"/>
+    </g>
+  </g>
+</svg>

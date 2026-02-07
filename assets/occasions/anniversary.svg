@@ -1,0 +1,43 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff9e6"/>
+      <stop offset="100%" stop-color="#ffe8cc"/>
+    </linearGradient>
+    <radialGradient id="ring1" cx="0.5" cy="0.5">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="60%" stop-color="#ffed4e"/>
+      <stop offset="100%" stop-color="#daa520"/>
+    </radialGradient>
+    <radialGradient id="gem" cx="0.3" cy="0.3">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="40%" stop-color="#e8f5ff"/>
+      <stop offset="100%" stop-color="#6ea8ff"/>
+    </radialGradient>
+    <filter id="ashadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#abg)"/>
+  <g filter="url(#ashadow)">
+    <circle cx="140" cy="120" r="45" fill="url(#ring1)" stroke="#b8860b" stroke-width="3"/>
+    <circle cx="140" cy="120" r="35" fill="none" stroke="#8b6914" stroke-width="4"/>
+    <ellipse cx="140" cy="115" rx="15" ry="10" fill="url(#gem)"/>
+    <polygon points="140,105 135,115 140,120 145,115" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="260" cy="120" r="45" fill="url(#ring1)" stroke="#b8860b" stroke-width="3"/>
+    <circle cx="260" cy="120" r="35" fill="none" stroke="#8b6914" stroke-width="4"/>
+    <ellipse cx="260" cy="115" rx="15" ry="10" fill="url(#gem)"/>
+    <polygon points="260,105 255,115 260,120 265,115" fill="rgba(255,255,255,0.5)"/>
+    <path d="M 175 120 Q 200 80 225 120" stroke="#ff69b4" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g opacity="0.4">
+      <circle cx="90" cy="60" r="4" fill="#ffd700"/>
+      <circle cx="310" cy="70" r="5" fill="#ffd700"/>
+      <circle cx="100" cy="180" r="3" fill="#ff69b4"/>
+      <circle cx="300" cy="170" r="4" fill="#ff69b4"/>
+    </g>
+  </g>
+  <text x="200" y="210" font-family="Brush Script MT, cursive" font-size="24" fill="#8b4513" text-anchor="middle" font-style="italic">Happy Anniversary</text>
+</svg>

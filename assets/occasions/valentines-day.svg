@@ -1,0 +1,38 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="vbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe5e9"/>
+      <stop offset="100%" stop-color="#ffc2cc"/>
+    </linearGradient>
+    <radialGradient id="light1" cx="0.3" cy="0.3">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#vbg)"/>
+  <ellipse cx="200" cy="240" rx="180" ry="40" fill="rgba(0,0,0,0.08)"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="140" cy="90" rx="32" ry="34" fill="#f8b8c4"/>
+    <ellipse cx="260" cy="90" rx="32" ry="34" fill="#f8b8c4"/>
+    <path d="M 110 100 Q 110 160 140 190 L 140 200 L 120 200 L 120 190 Q 100 170 100 140 Q 100 100 110 100" fill="#fdd8e0" stroke="#d89fab" stroke-width="2"/>
+    <path d="M 290 100 Q 290 160 260 190 L 260 200 L 280 200 L 280 190 Q 300 170 300 140 Q 300 100 290 100" fill="#fdd8e0" stroke="#d89fab" stroke-width="2"/>
+    <ellipse cx="140" cy="75" rx="5" ry="6" fill="#2c1810"/>
+    <ellipse cx="260" cy="75" rx="5" ry="6" fill="#2c1810"/>
+    <path d="M 133 84 Q 135 88 137 84" stroke="#d89fab" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 253 84 Q 255 88 257 84" stroke="#d89fab" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 160 120 Q 200 90 240 120 Q 240 150 200 180 Q 160 150 160 120" fill="#ff6b7f" stroke="#e63850" stroke-width="3"/>
+    <ellipse cx="180" cy="130" rx="8" ry="10" fill="rgba(255,255,255,0.4)"/>
+    <ellipse cx="220" cy="135" rx="6" ry="8" fill="rgba(255,255,255,0.3)"/>
+    <path d="M 120 200 L 120 185 L 115 185 L 115 200" fill="#7a5a4a"/>
+    <path d="M 130 200 L 130 188 L 125 188 L 125 200" fill="#7a5a4a"/>
+    <path d="M 270 200 L 270 188 L 265 188 L 265 200" fill="#7a5a4a"/>
+    <path d="M 280 200 L 280 185 L 275 185 L 275 200" fill="#7a5a4a"/>
+  </g>
+  <ellipse cx="350" cy="60" rx="30" ry="35" fill="url(#light1)"/>
+</svg>

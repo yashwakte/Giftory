@@ -1,0 +1,33 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cfbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e1f5fe"/>
+      <stop offset="100%" stop-color="#b3e5fc"/>
+    </linearGradient>
+    <filter id="cfshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.32"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#cfbg)"/>
+  <ellipse cx="200" cy="235" rx="140" ry="26" fill="rgba(0,0,0,0.05)"/>
+  <g filter="url(#cfshadow)">
+    <ellipse cx="200" cy="75" rx="40" ry="42" fill="#f4d4bc"/>
+    <ellipse cx="185" cy="70" rx="5" ry="6" fill="#2c1810"/>
+    <ellipse cx="215" cy="70" rx="5" ry="6" fill="#2c1810"/>
+    <path d="M 193 82 Q 200 86 207 82" stroke="#c9a985" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 170 60 Q 180 52 190 56 Q 200 50 210 56 Q 220 52 230 60" fill="#654321" stroke="#3e2723" stroke-width="1.5"/>
+    <path d="M 168 95 Q 162 140 170 180 L 165 200 L 235 200 L 230 180 Q 238 140 232 95" fill="#29b6f6"/>
+    <rect x="185" y="110" width="30" height="65" fill="#ffffff" opacity="0.2"/>
+    <circle cx="200" cy="120" r="3" fill="#01579b"/>
+    <circle cx="200" cy="132" r="3" fill="#01579b"/>
+    <circle cx="200" cy="144" r="3" fill="#01579b"/>
+    <path d="M 168 95 L 175 108 L 168 121" fill="#0277bd"/>
+    <path d="M 232 95 L 225 108 L 232 121" fill="#0277bd"/>
+    <circle cx="280" cy="100" r="16" fill="#ffc107" opacity="0.8"/>
+    <path d="M 270 93 Q 275 90 280 93" stroke="#f57c00" stroke-width="2" fill="none"/>
+    <path d="M 270 107 Q 275 104 280 107" stroke="#f57c00" stroke-width="2" fill="none"/>
+  </g>
+</svg>

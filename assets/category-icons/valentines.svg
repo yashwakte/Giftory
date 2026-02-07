@@ -1,0 +1,21 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="86" fill="#ffffff" stroke="#d8c7c7" stroke-width="4"/>
+  <defs>
+    <linearGradient id="vday-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffeef2"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect x="34" y="54" width="132" height="92" rx="14" fill="url(#vday-sky)"/>
+  <circle cx="70" cy="76" r="18" fill="#fcb1c3"/>
+  <circle cx="130" cy="76" r="18" fill="#fcb1c3"/>
+  <path d="M70 80c8 0 12 10 12 20v22h-24v-22c0-10 4-20 12-20z" fill="#f9d7df" stroke="#e24b67" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M130 80c8 0 12 10 12 20v22h-24v-22c0-10 4-20 12-20z" fill="#fce0e8" stroke="#e24b67" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="86" y="96" width="28" height="42" rx="6" fill="#fff7f9" stroke="#c55a71" stroke-width="2"/>
+  <path d="M90 108h20" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 126c-10-7-18-18-18-26 0-10 8-16 18-10 10-6 18 0 18 10 0 8-8 19-18 26z" fill="#ff6b81" stroke="#e24b67" stroke-width="2"/>
+  <circle cx="74" cy="68" r="5" fill="#ffffff"/>
+  <circle cx="126" cy="70" r="5" fill="#ffffff"/>
+  <path d="M70 134h60" stroke="#d8c7c7" stroke-width="3" stroke-linecap="round"/>
+</svg>

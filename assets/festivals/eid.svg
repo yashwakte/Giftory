@@ -1,0 +1,41 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="eidbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8f5e9"/>
+      <stop offset="50%" stop-color="#c8e6c9"/>
+      <stop offset="100%" stop-color="#81c784"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="0.3" cy="0.3">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#bdbdbd"/>
+    </radialGradient>
+    <filter id="eidshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#eidbg)"/>
+  <g filter="url(#eidshadow)">
+    <circle cx="310" cy="60" r="35" fill="url(#moon)">
+      <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <path d="M 310 28 L 312 36 L 320 36 L 314 41 L 316 49 L 310 44 L 304 49 L 306 41 L 300 36 L 308 36 Z" fill="#ffd54f"/>
+    <g transform="translate(100, 140)">
+      <path d="M 30 0 Q 20 20 20 40 L 30 50 L 70 50 L 80 40 Q 80 20 70 0" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/>
+      <path d="M 25 30 Q 30 35 35 30 M 40 30 Q 45 35 50 30 M 55 30 Q 60 35 65 30 M 70 30 Q 75 35 80 30" stroke="#81c784" stroke-width="2" fill="none"/>
+      <circle cx="50" cy="10" r="8" fill="#ffd54f"/>
+      <path d="M 45 5 L 50 -5 L 55 5" fill="#ffeb3b"/>
+    </g>
+    <g transform="translate(220, 145)">
+      <path d="M 30 0 Q 20 20 20 40 L 30 50 L 70 50 L 80 40 Q 80 20 70 0" fill="#66bb6a" stroke="#2e7d32" stroke-width="2"/>
+      <path d="M 25 30 Q 30 35 35 30 M 40 30 Q 45 35 50 30 M 55 30 Q 60 35 65 30 M 70 30 Q 75 35 80 30" stroke="#a5d6a7" stroke-width="2" fill="none"/>
+      <circle cx="50" cy="10" r="8" fill="#ff9800"/>
+      <path d="M 45 5 L 50 -5 L 55 5" fill="#ffb74d"/>
+    </g>
+    <path d="M 200 70 Q 180 85 185 100 Q 190 110 200 105 Q 210 110 215 100 Q 220 85 200 70" fill="#ffeb3b" opacity="0.8"/>
+    <circle cx="200" cy="90" r="5" fill="#ff9800"/>
+  </g>
+</svg>

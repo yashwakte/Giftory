@@ -1,0 +1,51 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diwbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d47a1"/>
+      <stop offset="50%" stop-color="#1565c0"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <radialGradient id="diya1" cx="0.5" cy="0.3">
+      <stop offset="0%" stop-color="#ffeb3b"/>
+      <stop offset="40%" stop-color="#ff9800"/>
+      <stop offset="100%" stop-color="#c62828"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="diwshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#diwbg)"/>
+  <g filter="url(#diwshadow)">
+    <ellipse cx="120" cy="160" rx="28" ry="12" fill="#8d6e63"/>
+    <path d="M 92 160 Q 95 140 120 135 Q 145 140 148 160" fill="#ff6f00"/>
+    <ellipse cx="120" cy="140" rx="15" ry="10" fill="url(#diya1)" filter="url(#glow)">
+      <animate attributeName="ry" values="10;12;10" dur="1.5s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="200" cy="150" rx="32" ry="14" fill="#8d6e63"/>
+    <path d="M 168 150 Q 172 128 200 122 Q 228 128 232 150" fill="#ff6f00"/>
+    <ellipse cx="200" cy="130" rx="18" ry="12" fill="url(#diya1)" filter="url(#glow)">
+      <animate attributeName="ry" values="12;14;12" dur="1.5s" repeatCount="indefinite" begin="0.3s"/>
+    </ellipse>
+    <ellipse cx="280" cy="160" rx="28" ry="12" fill="#8d6e63"/>
+    <path d="M 252 160 Q 255 140 280 135 Q 305 140 308 160" fill="#ff6f00"/>
+    <ellipse cx="280" cy="140" rx="15" ry="10" fill="url(#diya1)" filter="url(#glow)">
+      <animate attributeName="ry" values="10;12;10" dur="1.5s" repeatCount="indefinite" begin="0.6s"/>
+    </ellipse>
+    <g opacity="0.6">
+      <circle cx="60" cy="50" r="3" fill="#ffeb3b"/>
+      <circle cx="340" cy="70" r="4" fill="#ffeb3b"/>
+      <circle cx="150" cy="80" r="3" fill="#ffeb3b"/>
+      <circle cx="280" cy="60" r="3" fill="#ffeb3b"/>
+      <circle cx="220" cy="50" r="4" fill="#ffeb3b"/>
+    </g>
+    <path d="M 150 190 L 155 210 L 165 215 L 175 210 L 180 190 L 165 200 Z" fill="#c62828" opacity="0.5"/>
+    <path d="M 220 195 L 225 215 L 235 220 L 245 215 L 250 195 L 235 205 Z" fill="#c62828" opacity="0.5"/>
+  </g>
+</svg>

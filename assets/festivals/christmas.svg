@@ -1,0 +1,53 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="xmasbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8e6c9"/>
+      <stop offset="50%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#66bb6a"/>
+    </linearGradient>
+    <radialGradient id="ornament1" cx="0.4" cy="0.3">
+      <stop offset="0%" stop-color="#ffeb3b"/>
+      <stop offset="70%" stop-color="#ff9800"/>
+      <stop offset="100%" stop-color="#f57c00"/>
+    </radialGradient>
+    <radialGradient id="ornament2" cx="0.4" cy="0.3">
+      <stop offset="0%" stop-color="#e91e63"/>
+      <stop offset="70%" stop-color="#c2185b"/>
+      <stop offset="100%" stop-color="#880e4f"/>
+    </radialGradient>
+    <filter id="xmasshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#xmasbg)"/>
+  <g filter="url(#xmasshadow)">
+    <path d="M 200 40 L 170 90 L 185 90 L 160 130 L 178 130 L 150 180 L 250 180 L 222 130 L 240 130 L 215 90 L 230 90 Z" fill="#2e7d32" stroke="#1b5e20" stroke-width="3"/>
+    <rect x="185" y="180" width="30" height="25" fill="#795548"/>
+    <circle cx="200" cy="60" r="8" fill="url(#ornament1)">
+      <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="185" cy="105" r="9" fill="url(#ornament2)">
+      <animate attributeName="r" values="9;11;9" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="215" cy="105" r="9" fill="#2196f3">
+      <animate attributeName="r" values="9;11;9" dur="2s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle cx="170" cy="150" r="8" fill="url(#ornament1)">
+      <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    <circle cx="200" cy="145" r="9" fill="#9c27b0">
+      <animate attributeName="r" values="9;11;9" dur="2s" repeatCount="indefinite" begin="0.8s"/>
+    </circle>
+    <circle cx="230" cy="150" r="8" fill="url(#ornament2)">
+      <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+    <path d="M 175 70 L 175 80" stroke="#ffeb3b" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 170 74 L 180 74" stroke="#ffeb3b" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="200,25 205,35 210,25" fill="#ffeb3b"/>
+    <rect x="198" y="35" width="4" height="8" fill="#ffeb3b"/>
+    <path d="M 185 200 L 195 210 L 205 200 L 215 210" stroke="#ffeb3b" stroke-width="2" fill="none" opacity="0.6"/>
+  </g>
+</svg>

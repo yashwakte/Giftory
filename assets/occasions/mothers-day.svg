@@ -1,0 +1,50 @@
+<svg width="400" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mdbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff0f5"/>
+      <stop offset="100%" stop-color="#ffb3d9"/>
+    </linearGradient>
+    <linearGradient id="mdress" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff80ab"/>
+      <stop offset="100%" stop-color="#f50057"/>
+    </linearGradient>
+    <radialGradient id="rose" cx="0.4" cy="0.4">
+      <stop offset="0%" stop-color="#ff4081"/>
+      <stop offset="60%" stop-color="#f06292"/>
+      <stop offset="100%" stop-color="#c2185b"/>
+    </radialGradient>
+    <filter id="mdshadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.35"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="url(#mdbg)"/>
+  <ellipse cx="200" cy="230" rx="140" ry="25" fill="rgba(0,0,0,0.06)"/>
+  <g filter="url(#mdshadow)">
+    <ellipse cx="200" cy="75" rx="38" ry="40" fill="#f4d4bc"/>
+    <path d="M 165 65 Q 175 55 185 60 Q 195 50 200 50 Q 205 50 215 60 Q 225 55 235 65" fill="#8b4513" stroke="#654321" stroke-width="1.5"/>
+    <ellipse cx="188" cy="68" rx="4" ry="5" fill="#2c1810"/>
+    <ellipse cx="212" cy="68" rx="4" ry="5" fill="#2c1810"/>
+    <path d="M 193 80 Q 200 84 207 80" stroke="#c9a985" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <circle cx="180" cy="85" r="6" fill="#ff8a80" opacity="0.6"/>
+    <circle cx="220" cy="85" r="6" fill="#ff8a80" opacity="0.6"/>
+    <path d="M 165 95 Q 155 140 165 175 L 160 200 L 240 200 L 235 175 Q 245 140 235 95" fill="url(#mdress)"/>
+    <ellipse cx="200" cy="120" rx="30" ry="25" fill="rgba(255,255,255,0.2)"/>
+    <g transform="translate(80, 120)">
+      <ellipse cx="0" cy="0" rx="18" ry="20" fill="url(#rose)"/>
+      <ellipse cx="-8" cy="-5" rx="12" ry="14" fill="#ff80ab" opacity="0.6"/>
+      <ellipse cx="8" cy="-5" rx="12" ry="14" fill="#ff80ab" opacity="0.6"/>
+      <ellipse cx="0" cy="-10" rx="14" ry="16" fill="#ff4081" opacity="0.5"/>
+      <path d="M 0 5 Q -5 20 -8 35 L -3 35 L 0 25 L 3 35 L 8 35 Q 5 20 0 5" fill="#4caf50" stroke="#2e7d32" stroke-width="1"/>
+    </g>
+    <g transform="translate(320, 130)">
+      <ellipse cx="0" cy="0" rx="16" ry="18" fill="url(#rose)"/>
+      <ellipse cx="-7" cy="-4" rx="10" ry="12" fill="#ff80ab" opacity="0.6"/>
+      <ellipse cx="7" cy="-4" rx="10" ry="12" fill="#ff80ab" opacity="0.6"/>
+      <ellipse cx="0" cy="-8" rx="12" ry="14" fill="#ff4081" opacity="0.5"/>
+    </g>
+  </g>
+  <text x="200" y="225" font-family="Arial, sans-serif" font-size="18" fill="#c2185b" text-anchor="middle" font-weight="bold">Happy Mother's Day</text>
+</svg>
