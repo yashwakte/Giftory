@@ -1,112 +1,118 @@
 <!-- Shop Page Content -->
 <div class="shop-container">
-  <div class="shop-header">
-    <h1>{{ getCategoryTitle() }}</h1>
-    <p class="products-count">{{ filteredProducts().length }} Products</p>
-  </div>
+  <!-- Show Hamper Builder for Personalized Category -->
+  @if (isPersonalizedCategory()) {
+    <app-hamper-builder></app-hamper-builder>
+  } @else {
+    <!-- Regular Shop Layout -->
+    <div class="shop-header">
+      <h1>{{ getCategoryTitle() }}</h1>
+      <p class="products-count">{{ filteredProducts().length }} Products</p>
+    </div>
 
-  <div class="controls-shell">
-    <div class="controls-row">
-      <div class="search-box">
-        <input
-          type="text"
-          placeholder="Search products..."
-          [value]="searchQuery()"
-          (input)="onSearchChange($any($event.target).value)"
-          class="search-input"
-        />
-        <svg
-          class="search-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clip-rule="evenodd"
+    <div class="controls-shell">
+      <div class="controls-row">
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="Search products..."
+            [value]="searchQuery()"
+            (input)="onSearchChange($any($event.target).value)"
+            class="search-input"
           />
-        </svg>
-      </div>
-
-      <div class="controls-right">
-        <button class="filter-pill" type="button" disabled>Filters coming soon</button>
-        <div class="filter-controls">
-          <select
-            [value]="sortBy()"
-            (change)="onSortChange($any($event.target).value)"
-            class="sort-select"
+          <svg
+            class="search-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
           >
-            <option value="name">Sort by Name</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-          </select>
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+
+        <div class="controls-right">
+          <button class="filter-pill" type="button" disabled>Filters coming soon</button>
+          <div class="filter-controls">
+            <select
+              [value]="sortBy()"
+              (change)="onSortChange($any($event.target).value)"
+              class="sort-select"
+            >
+              <option value="name">Sort by Name</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  @if (filteredProducts().length === 0) {
-    <div class="no-products">
-      <p>No products found</p>
-    </div>
-  } @else {
-    <div class="product-grid">
-      @for (product of filteredProducts(); track product.id) {
-        <div class="product-card" (click)="viewProduct(product.id)">
-          <div class="product-image-wrapper">
-            <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
-            <button
-              class="wishlist-btn"
-              [class.active]="isInWishlist(product.id)"
-              (click)="toggleWishlist(product, $event)"
-              aria-label="Add to wishlist"
-            >
-              @if (isInWishlist(product.id)) {
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+    @if (filteredProducts().length === 0) {
+      <div class="no-products">
+        <p>No products found</p>
+      </div>
+    } @else {
+      <div class="product-grid">
+        @for (product of filteredProducts(); track product.id) {
+          <div class="product-card" (click)="viewProduct(product.id)">
+            <div class="product-image-wrapper">
+              <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+              <button
+                class="wishlist-btn"
+                [class.active]="isInWishlist(product.id)"
+                (click)="toggleWishlist(product, $event)"
+                aria-label="Add to wishlist"
+              >
+                @if (isInWishlist(product.id)) {
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                    />
+                  </svg>
+                } @else {
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                }
+              </button>
+            </div>
+
+            <div class="product-info">
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-description">{{ product.description }}</p>
+              <div class="product-footer">
+                <p class="product-price">₹{{ product.price }}</p>
+              </div>
+            </div>
+
+            <div class="product-actions">
+              <button class="btn btn-cart" (click)="addToCart(product, $event)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path
-                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                    d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
                   />
                 </svg>
-              } @else {
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-              }
-            </button>
-          </div>
-
-          <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            <div class="product-footer">
-              <p class="product-price">₹{{ product.price }}</p>
+                Add to Cart
+              </button>
+              <button class="btn btn-buy" (click)="buyNow(product, $event)">Buy Now</button>
             </div>
           </div>
-
-          <div class="product-actions">
-            <button class="btn btn-cart" (click)="addToCart(product, $event)">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                <path
-                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
-                />
-              </svg>
-              Add to Cart
-            </button>
-            <button class="btn btn-buy" (click)="buyNow(product, $event)">Buy Now</button>
-          </div>
-        </div>
-      }
-    </div>
+        }
+      </div>
+    }
   }
 </div>

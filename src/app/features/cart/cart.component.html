@@ -21,32 +21,129 @@
 
   <section *ngIf="items.length > 0" class="cart-layout">
     <div class="cart-items">
-      <div class="cart-item-card" *ngFor="let item of items">
-        <div
-          class="item-thumb"
-          [style.backgroundImage]="item.imageUrl ? 'url(' + item.imageUrl + ')' : ''"
-        >
-          <span *ngIf="!item.imageUrl" class="placeholder">Gift</span>
-        </div>
-        <div class="item-details">
-          <div class="item-top">
-            <h3>{{ item.productName }}</h3>
-            <button class="text-btn" (click)="removeItem(item)">Remove</button>
+      <div class="cart-item-card" *ngFor="let item of items" [class.hamper-card]="item.isHamper">
+        <!-- Hamper Item Display -->
+        <div *ngIf="item.isHamper" class="hamper-item">
+          <div class="item-thumb hamper-thumb">
+            <span class="hamper-icon">🎁</span>
           </div>
-          <p class="item-price">{{ item.price | currency: 'INR' : 'symbol' }}</p>
-          <div class="item-actions">
-            <div class="qty-stepper">
-              <button (click)="adjustQuantity(item, -1)" [disabled]="item.quantity <= 1">−</button>
-              <input
-                type="number"
-                min="1"
-                [value]="item.quantity"
-                (input)="updateQuantity(item, $event)"
-              />
-              <button (click)="adjustQuantity(item, 1)">+</button>
+          <div class="item-details hamper-details">
+            <div class="item-top">
+              <div>
+                <h3>{{ item.productName }}</h3>
+                <span class="hamper-badge">Custom Gift Hamper</span>
+                @if (item.hamperData) {
+                  <p class="hamper-meta">
+                    {{ item.hamperData.items.length }} items •
+                    {{ item.hamperData.size | titlecase }} •
+                    {{ item.hamperData.giftWrapTier | titlecase }} wrapping
+                  </p>
+                }
+              </div>
+              <button class="text-btn" (click)="removeItem(item)">Remove</button>
             </div>
-            <div class="item-subtotal">
-              Subtotal {{ item.price * item.quantity | currency: 'INR' : 'symbol' }}
+
+            <p class="item-price">{{ item.price | currency: 'INR' : 'symbol' }}</p>
+
+            <!-- Expandable Hamper Details -->
+            @if (item.hamperData) {
+              <button
+                class="expand-btn"
+                (click)="toggleHamperDetails(item.productId)"
+                [class.expanded]="isHamperExpanded(item.productId)"
+              >
+                <span>
+                  {{ isHamperExpanded(item.productId) ? 'Hide' : 'View' }} items in hamper
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+
+              @if (isHamperExpanded(item.productId)) {
+                <div class="hamper-items-list">
+                  <h4>Items in this hamper:</h4>
+                  <div class="hamper-grid">
+                    @for (hamperItem of item.hamperData.items; track hamperItem.productId) {
+                      <div class="hamper-item-mini">
+                        <img [src]="hamperItem.imageUrl" [alt]="hamperItem.productName" />
+                        <div class="hamper-item-info">
+                          <span class="name">{{ hamperItem.productName }}</span>
+                          <span class="price">₹{{ hamperItem.price }}</span>
+                        </div>
+                      </div>
+                    }
+                  </div>
+
+                  @if (item.hamperData.recipientName) {
+                    <div class="hamper-extra">
+                      <strong>For:</strong> {{ item.hamperData.recipientName }}
+                    </div>
+                  }
+
+                  @if (item.hamperData.giftMessage) {
+                    <div class="hamper-extra">
+                      <strong>Message:</strong> "{{ item.hamperData.giftMessage }}"
+                    </div>
+                  }
+                </div>
+              }
+            }
+
+            <div class="item-actions">
+              <div class="qty-stepper">
+                <button (click)="adjustQuantity(item, -1)" [disabled]="item.quantity <= 1">
+                  −
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  [value]="item.quantity"
+                  (input)="updateQuantity(item, $event)"
+                />
+                <button (click)="adjustQuantity(item, 1)">+</button>
+              </div>
+              <div class="item-subtotal">
+                Subtotal {{ item.price * item.quantity | currency: 'INR' : 'symbol' }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regular Product Display -->
+        <div *ngIf="!item.isHamper" class="regular-item">
+          <div
+            class="item-thumb"
+            [style.backgroundImage]="item.imageUrl ? 'url(' + item.imageUrl + ')' : ''"
+          >
+            <span *ngIf="!item.imageUrl" class="placeholder">Gift</span>
+          </div>
+          <div class="item-details">
+            <div class="item-top">
+              <h3>{{ item.productName }}</h3>
+              <button class="text-btn" (click)="removeItem(item)">Remove</button>
+            </div>
+            <p class="item-price">{{ item.price | currency: 'INR' : 'symbol' }}</p>
+            <div class="item-actions">
+              <div class="qty-stepper">
+                <button (click)="adjustQuantity(item, -1)" [disabled]="item.quantity <= 1">
+                  −
+                </button>
+                <input
+                  type="number"
+                  min="1"
+                  [value]="item.quantity"
+                  (input)="updateQuantity(item, $event)"
+                />
+                <button (click)="adjustQuantity(item, 1)">+</button>
+              </div>
+              <div class="item-subtotal">
+                Subtotal {{ item.price * item.quantity | currency: 'INR' : 'symbol' }}
+              </div>
             </div>
           </div>
         </div>

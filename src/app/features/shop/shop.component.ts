@@ -6,11 +6,12 @@ import { ProductService } from './services/product.service';
 import { CartService } from '../cart/services/cart.service';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { Product } from './models/product.model';
+import { HamperBuilderComponent } from './hamper-builder.component';
 
 @Component({
   selector: 'app-shop',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HamperBuilderComponent],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
 })
@@ -20,12 +21,15 @@ export class ShopComponent implements OnInit {
   searchQuery = signal<string>('');
   sortBy = signal<string>('name');
 
+  // Check if we're in personalized category (hamper builder mode)
+  isPersonalizedCategory = computed(() => this.currentCategory() === 'personalized');
+
   filteredProducts = computed(() => {
     let products = this.allProducts();
 
     // Filter by category
     const category = this.currentCategory();
-    if (category) {
+    if (category && category !== 'personalized') {
       products = products.filter((p) => p.category === category);
     }
 

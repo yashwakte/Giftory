@@ -1,0 +1,277 @@
+<!-- Hamper Builder Page -->
+<div class="hamper-builder-container">
+  <!-- Header -->
+  <div class="builder-header">
+    <h1>🎁 Build Your Custom Gift Hamper</h1>
+    <p class="subtitle">Create a personalized gift collection for your loved ones</p>
+  </div>
+
+  <!-- Success Message -->
+  @if (successMessage()) {
+    <div class="success-banner">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span>{{ successMessage() }}</span>
+    </div>
+  }
+
+  <!-- Main Builder Layout -->
+  <div class="builder-layout">
+    <!-- Left Column: Product Selection -->
+    <div class="products-column">
+      <div class="section-card">
+        <h2>📦 Step 1: Choose Items</h2>
+        <p class="section-desc">Select products to add to your hamper</p>
+
+        <div class="products-grid">
+          @for (product of availableProducts(); track product.id) {
+            <div
+              class="product-card-mini"
+              [class.selected]="hamperService.isProductInHamper(product.id)"
+              [class.disabled]="
+                hamperService.isFull() && !hamperService.isProductInHamper(product.id)
+              "
+              (click)="toggleProduct(product)"
+            >
+              <div class="product-image-mini">
+                <img [src]="product.imageUrl" [alt]="product.name" />
+                @if (hamperService.isProductInHamper(product.id)) {
+                  <div class="selected-badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                }
+              </div>
+              <div class="product-info-mini">
+                <h4>{{ product.name }}</h4>
+                <p class="price">₹{{ product.price }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Hamper Visual & Configuration -->
+    <div class="hamper-column">
+      <!-- Visual Hamper Container -->
+      <div class="section-card hamper-visual">
+        <h2>🧺 Your Hamper</h2>
+
+        <!-- Hamper Size Selector -->
+        <div class="size-selector">
+          @for (size of hamperSizes; track size.size) {
+            <button
+              class="size-btn"
+              [class.active]="isSelectedSize(size.size)"
+              (click)="selectSize(size.size)"
+            >
+              <span class="size-label">{{ size.label }}</span>
+              <span class="size-info">{{ size.maxItems }} items • ₹{{ size.basePrice }}</span>
+            </button>
+          }
+        </div>
+
+        <!-- Hamper Basket Visual -->
+        <div class="hamper-basket">
+          <div class="basket-icon">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Basket SVG -->
+              <path
+                d="M30 80 L170 80 L160 180 Q150 190 100 190 Q50 190 40 180 Z"
+                stroke="#8B4513"
+                stroke-width="3"
+                fill="#D2691E"
+                opacity="0.3"
+              />
+              <path d="M30 80 L170 80 L165 120 L35 120 Z" fill="#A0522D" opacity="0.4" />
+              <path
+                d="M60 80 Q60 50 100 50 Q140 50 140 80"
+                stroke="#8B4513"
+                stroke-width="3"
+                fill="none"
+              />
+            </svg>
+          </div>
+
+          <!-- Items in Hamper -->
+          <div class="hamper-items">
+            @if (hamperService.items().length === 0) {
+              <p class="empty-message">Your hamper is empty. Start adding items!</p>
+            } @else {
+              <div class="items-list">
+                @for (item of hamperService.items(); track item.productId) {
+                  <div class="hamper-item">
+                    <img [src]="item.imageUrl" [alt]="item.productName" />
+                    <div class="item-details">
+                      <span class="item-name">{{ item.productName }}</span>
+                      <span class="item-price">₹{{ item.price }}</span>
+                    </div>
+                    <button
+                      class="remove-btn"
+                      (click)="hamperService.removeItemFromHamper(item.productId)"
+                      title="Remove item"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Capacity Indicator -->
+          <div class="capacity-indicator">
+            <div class="capacity-bar">
+              <div
+                class="capacity-fill"
+                [style.width.%]="(hamperService.itemCount() / hamperService.maxItems()) * 100"
+              ></div>
+            </div>
+            <p class="capacity-text">
+              {{ hamperService.itemCount() }} / {{ hamperService.maxItems() }} items
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gift Wrap Selection -->
+      <div class="section-card">
+        <h3>🎀 Step 2: Choose Gift Wrapping</h3>
+        <div class="giftwrap-options">
+          @for (wrap of giftWrapTiers; track wrap.tier) {
+            <div
+              class="giftwrap-card"
+              [class.active]="isSelectedGiftWrap(wrap.tier)"
+              (click)="selectGiftWrap(wrap.tier)"
+            >
+              <div class="giftwrap-header">
+                <h4>{{ wrap.label }}</h4>
+                <p class="giftwrap-price">
+                  @if (wrap.price === 0) {
+                    <span>Free</span>
+                  } @else {
+                    <span>+₹{{ wrap.price }}</span>
+                  }
+                </p>
+              </div>
+              <ul class="giftwrap-features">
+                @for (feature of wrap.features; track feature) {
+                  <li>{{ feature }}</li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Customization Section -->
+      <div class="section-card">
+        <div class="customize-header" (click)="toggleCustomization()">
+          <h3>✨ Step 3: Personalize (Optional)</h3>
+          <button class="toggle-btn" [class.open]="showCustomization()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        @if (showCustomization()) {
+          <div class="customize-form">
+            <div class="form-group">
+              <label for="hamperName">Hamper Name</label>
+              <input
+                type="text"
+                id="hamperName"
+                [value]="customName()"
+                (input)="customName.set($any($event.target).value)"
+                (blur)="updateCustomName()"
+                placeholder="e.g., Birthday Surprise Box"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="recipientName">Recipient Name</label>
+              <input
+                type="text"
+                id="recipientName"
+                [value]="recipientName()"
+                (input)="recipientName.set($any($event.target).value)"
+                (blur)="updateRecipientName()"
+                placeholder="e.g., Sarah"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="giftMessage">Gift Message</label>
+              <textarea
+                id="giftMessage"
+                rows="3"
+                [value]="giftMessage()"
+                (input)="giftMessage.set($any($event.target).value)"
+                (blur)="updateGiftMessage()"
+                placeholder="Add a heartfelt message..."
+              ></textarea>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Price Summary & Actions -->
+      <div class="section-card summary-card">
+        <h3>💰 Price Summary</h3>
+        <div class="price-breakdown">
+          <div class="price-row">
+            <span>Items Total:</span>
+            <span>₹{{ hamperService.totalItemsPrice() }}</span>
+          </div>
+          <div class="price-row">
+            <span>Hamper Basket:</span>
+            <span>₹{{ hamperService.hamperBasePrice() }}</span>
+          </div>
+          <div class="price-row">
+            <span>Gift Wrapping:</span>
+            <span>₹{{ hamperService.giftWrapPrice() }}</span>
+          </div>
+          <div class="price-row total">
+            <span>Total:</span>
+            <span>₹{{ hamperService.totalPrice() }}</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button
+            class="btn btn-primary btn-large"
+            [disabled]="hamperService.itemCount() === 0"
+            (click)="addToCart()"
+          >
+            Add to Cart
+          </button>
+          <button class="btn btn-secondary" (click)="clearHamper()">Clear Hamper</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

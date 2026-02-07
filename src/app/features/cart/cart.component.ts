@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CartService } from './services/cart.service';
 import { CartItem } from './models/cart-item.model';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class CartComponent {
   private router = inject(Router);
 
   items: CartItem[] = [];
+  expandedHampers = signal<Set<number>>(new Set());
 
   ngOnInit() {
     this.items = this.cartService.getItems();
@@ -32,6 +33,22 @@ export class CartComponent {
 
   get estimatedTotal(): number {
     return this.subtotal;
+  }
+
+  isHamperExpanded(productId: number): boolean {
+    return this.expandedHampers().has(productId);
+  }
+
+  toggleHamperDetails(productId: number): void {
+    this.expandedHampers.update((set) => {
+      const newSet = new Set(set);
+      if (newSet.has(productId)) {
+        newSet.delete(productId);
+      } else {
+        newSet.add(productId);
+      }
+      return newSet;
+    });
   }
 
   updateQuantity(item: CartItem, event: Event) {
