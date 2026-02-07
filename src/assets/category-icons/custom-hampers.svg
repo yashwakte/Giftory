@@ -1,0 +1,24 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="86" fill="#ffffff" stroke="#d8c7c7" stroke-width="4"/>
+  <defs>
+    <linearGradient id="hamper-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff7f7"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect x="42" y="70" width="116" height="94" rx="16" fill="url(#hamper-bg)"/>
+  <path d="M74 148h52l-6 14H80z" fill="#e2b572" stroke="#c08a3a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M60 116h80l-10 32H70z" fill="#ffe0b3" stroke="#c08a3a" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M76 118c0-20 12-36 24-40 12 4 24 20 24 40" fill="#fce6ef" stroke="#e24b67" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="100" cy="92" r="10" fill="#ffd7df" stroke="#e24b67" stroke-width="2"/>
+  <rect x="82" y="100" width="12" height="14" rx="3" fill="#d9f2ff"/>
+  <rect x="106" y="98" width="12" height="16" rx="3" fill="#ffe9c9"/>
+  <path d="M64 116h72" stroke="#c08a3a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M122 88c6 4 10 12 10 20" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M68 88c-6 4-10 12-10 20" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M96 76c0-10 6-18 14-18" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M104 76c0-10-6-18-14-18" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="128" cy="112" r="8" fill="#ff6b6b" opacity="0.85"/>
+  <circle cx="72" cy="112" r="8" fill="#ff6b6b" opacity="0.85"/>
+</svg>

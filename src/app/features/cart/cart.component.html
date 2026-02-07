@@ -1,5 +1,77 @@
-<!-- Cart Page Content -->
-<div class="cart-container">
-  <h1>Your Cart</h1>
-  <!-- Cart items will be rendered here -->
+<div class="cart-page">
+  <section class="cart-hero">
+    <div>
+      <p class="eyebrow">Your bag</p>
+      <h1>Cart</h1>
+      <p class="subtitle">Review your picks, adjust quantities, and checkout securely.</p>
+    </div>
+    <span class="pill" *ngIf="itemCount > 0"
+      >{{ itemCount }} item{{ itemCount === 1 ? '' : 's' }}</span
+    >
+  </section>
+
+  <section *ngIf="items.length === 0" class="empty-state">
+    <div class="empty-card">
+      <div class="empty-icon">🛍️</div>
+      <h3>Your cart is empty</h3>
+      <p>Start adding gifts and surprise someone today.</p>
+      <a routerLink="/shop" class="btn ghost">Browse gifts</a>
+    </div>
+  </section>
+
+  <section *ngIf="items.length > 0" class="cart-layout">
+    <div class="cart-items">
+      <div class="cart-item-card" *ngFor="let item of items">
+        <div
+          class="item-thumb"
+          [style.backgroundImage]="item.imageUrl ? 'url(' + item.imageUrl + ')' : ''"
+        >
+          <span *ngIf="!item.imageUrl" class="placeholder">Gift</span>
+        </div>
+        <div class="item-details">
+          <div class="item-top">
+            <h3>{{ item.productName }}</h3>
+            <button class="text-btn" (click)="removeItem(item)">Remove</button>
+          </div>
+          <p class="item-price">{{ item.price | currency: 'INR' : 'symbol' }}</p>
+          <div class="item-actions">
+            <div class="qty-stepper">
+              <button (click)="adjustQuantity(item, -1)" [disabled]="item.quantity <= 1">−</button>
+              <input
+                type="number"
+                min="1"
+                [value]="item.quantity"
+                (input)="updateQuantity(item, $event)"
+              />
+              <button (click)="adjustQuantity(item, 1)">+</button>
+            </div>
+            <div class="item-subtotal">
+              Subtotal {{ item.price * item.quantity | currency: 'INR' : 'symbol' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="summary-card">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>{{ subtotal | currency: 'INR' : 'symbol' }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span class="free-tag">Free</span>
+      </div>
+      <div class="summary-row total">
+        <span>Estimated total</span>
+        <span>{{ estimatedTotal | currency: 'INR' : 'symbol' }}</span>
+      </div>
+      <button class="btn primary" (click)="checkout()">Proceed to checkout</button>
+      <button class="btn ghost" routerLink="/shop">Continue shopping</button>
+      <div class="assurance">
+        <div>✓ Secure payments</div>
+        <div>✓ Easy returns</div>
+      </div>
+    </aside>
+  </section>
 </div>

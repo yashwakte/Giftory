@@ -1,21 +1,179 @@
 <nav class="navbar">
   <div class="logo">
-    <a routerLink="/">
+    <a routerLink="/" (click)="closeMobileNav()">
       <div class="navbar-logo brand-text">Giftory</div>
     </a>
   </div>
-  <div class="hamburger" [class.open]="showMobileNav" (click)="showMobileNav = !showMobileNav">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+
   <ul class="nav-links" [class.open]="showMobileNav">
-    <li><a routerLink="/shop" (click)="showMobileNav = false">Shop All</a></li>
-    <li><a routerLink="/category/birthday" (click)="showMobileNav = false">Birthday</a></li>
-    <li><a routerLink="/category/anniversary" (click)="showMobileNav = false">Anniversary</a></li>
-    <li><a routerLink="/category/for-him" (click)="showMobileNav = false">For Him</a></li>
-    <li><a routerLink="/category/for-her" (click)="showMobileNav = false">For Her</a></li>
-    <li><a routerLink="/category/personalized" (click)="showMobileNav = false">Personalized</a></li>
-    <li><a routerLink="/cart" (click)="showMobileNav = false">Cart</a></li>
+    <!-- Anniversary Gifts Dropdown -->
+    <li
+      class="nav-item"
+      (mouseenter)="toggleDropdown('anniversary')"
+      (mouseleave)="closeDropdown()"
+      (click)="toggleDropdown('anniversary')"
+    >
+      <a class="nav-link">
+        Anniversary Gifts
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="dropdown-icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+      <ul class="dropdown-menu" [class.show]="activeDropdown === 'anniversary'">
+        @for (link of anniversaryLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.route" (click)="closeMobileNav()">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </li>
+
+    <!-- Birthday Gifts Dropdown -->
+    <li
+      class="nav-item"
+      (mouseenter)="toggleDropdown('birthday')"
+      (mouseleave)="closeDropdown()"
+      (click)="toggleDropdown('birthday')"
+    >
+      <a class="nav-link">
+        Birthday Gifts
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="dropdown-icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+      <ul class="dropdown-menu" [class.show]="activeDropdown === 'birthday'">
+        @for (link of birthdayLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.route" (click)="closeMobileNav()">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </li>
+
+    <!-- Gifts by Occasion Dropdown -->
+    <li
+      class="nav-item"
+      (mouseenter)="toggleDropdown('occasion')"
+      (mouseleave)="closeDropdown()"
+      (click)="toggleDropdown('occasion')"
+    >
+      <a class="nav-link">
+        Gifts by Occasion
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="dropdown-icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+      <ul class="dropdown-menu" [class.show]="activeDropdown === 'occasion'">
+        @for (link of occasionLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.route" (click)="closeMobileNav()">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </li>
+
+    <!-- Gifts by Relationship Dropdown -->
+    <li
+      class="nav-item"
+      (mouseenter)="toggleDropdown('relationship')"
+      (mouseleave)="closeDropdown()"
+      (click)="toggleDropdown('relationship')"
+    >
+      <a class="nav-link">
+        Gifts by Relationship
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="dropdown-icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </a>
+      <ul class="dropdown-menu" [class.show]="activeDropdown === 'relationship'">
+        @for (link of relationshipLinks; track link.label) {
+          <li>
+            <a [routerLink]="link.route" (click)="closeMobileNav()">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </li>
+
+    <!-- Personalized Gifts -->
+    <li class="nav-item">
+      <a routerLink="/category/personalized" class="nav-link" (click)="closeMobileNav()">
+        Personalized Gifts
+      </a>
+    </li>
   </ul>
+  <div class="nav-actions">
+    <a routerLink="/profile" class="icon-btn" aria-label="Profile" (click)="closeMobileNav()">
+      <span class="icon-circle" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 12.75A4.125 4.125 0 1012 4.5a4.125 4.125 0 000 8.25zm-6.75 6.187a8.25 8.25 0 0113.5 0 .75.75 0 001.2-.9 9.75 9.75 0 00-15.9 0 .75.75 0 101.2.9z"
+          />
+        </svg>
+      </span>
+    </a>
+    <a routerLink="/checkout" class="icon-btn" aria-label="Checkout" (click)="closeMobileNav()">
+      <span class="icon-circle" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M6.375 4.5a1.125 1.125 0 00-1.09.875L4.01 12.1a2.625 2.625 0 002.565 3.15h9.53l-.252 1.26a.75.75 0 101.472.294l.315-1.575 1.35-6.75A1.5 1.5 0 0017.505 6H6.706l.19-1.05H18a.75.75 0 000-1.5H6.375zM7.5 18.75a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm7.5 0a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+          />
+        </svg>
+      </span>
+    </a>
+    <a routerLink="/cart" class="icon-btn cart-quick" aria-label="Cart" (click)="closeMobileNav()">
+      <span class="icon-circle" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="cart-icon"
+        >
+          <path
+            d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+          />
+        </svg>
+      </span>
+    </a>
+    <div class="hamburger" [class.open]="showMobileNav" (click)="showMobileNav = !showMobileNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 </nav>

@@ -1,0 +1,21 @@
+<section class="profile-hero">
+  <p class="eyebrow">Profile</p>
+  <h1>Your Giftory space</h1>
+  <p class="lede">
+    Sign in to track orders, save addresses, and keep wishlists ready for every celebration.
+  </p>
+
+  <div class="cta-row">
+    <a routerLink="/checkout" class="primary-btn">Go to checkout</a>
+    <a routerLink="/shop" class="ghost-btn">Continue shopping</a>
+  </div>
+
+  <div class="perk-grid">
+    @for (perk of perks; track perk.title) {
+      <article class="perk-card">
+        <h3>{{ perk.title }}</h3>
+        <p>{{ perk.copy }}</p>
+      </article>
+    }
+  </div>
+</section>

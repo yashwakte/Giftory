@@ -8,115 +8,304 @@
 </section>
 
 <section class="category-icons-row">
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/valentines.jpg" alt="Valentine's Day" />
+  @for (cat of categories; track cat.name) {
+    <div class="category-icon-item" (click)="navigateToCategory(cat.route)">
+      <div class="icon-circle">
+        <img [src]="cat.icon" [alt]="cat.label" />
+      </div>
+      <div class="icon-label">{{ cat.label }}</div>
     </div>
-    <div class="icon-label">Valentine’s Day</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/desk-calendars.jpg" alt="Desk Calendars" />
-    </div>
-    <div class="icon-label">Desk Calendars</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/anniversary.jpg" alt="Anniversary" />
-    </div>
-    <div class="icon-label">Anniversary</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle"><img src="assets/category-icons/birthday.jpg" alt="Birthday" /></div>
-    <div class="icon-label">Birthday</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle"><img src="assets/category-icons/boyfriend.jpg" alt="Boyfriend" /></div>
-    <div class="icon-label">Boyfriend</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/custom-hampers.jpg" alt="Custom Hampers" />
-    </div>
-    <div class="icon-label">Custom Hampers</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/girlfriend.jpg" alt="Girlfriend" />
-    </div>
-    <div class="icon-label">Girlfriend</div>
-  </div>
-  <div class="category-icon-item">
-    <div class="icon-circle">
-      <img src="assets/category-icons/home-decor.jpg" alt="Home Decor" />
-    </div>
-    <div class="icon-label">Home Decor</div>
-  </div>
+  }
 </section>
+
 <section class="category-tiles">
-  <div class="category-tile" routerLink="/category/birthday">
-    <span>Gifts by Occasions</span>
-  </div>
-  <div class="category-tile" routerLink="/category/anniversary">
-    <span>Gifts by Relationships</span>
-  </div>
-  <div class="category-tile" routerLink="/category/for-him">
-    <span>Gifts by Festival</span>
-  </div>
-  <div class="category-tile" routerLink="/category/for-her">
-    <span>Personalized Gifts</span>
-  </div>
-  <!-- <div class="category-tile" routerLink="/category/personalized">
-    <span>Personalized</span>
-  </div> -->
+  @for (cat of mainCategories; track cat.label) {
+    <div class="category-tile" (click)="navigateToCategory(cat.route)">
+      <span>{{ cat.label }}</span>
+    </div>
+  }
 </section>
+
 <section class="bestsellers">
   <h2>Bestsellers</h2>
-  <div class="product-grid">
-    <div class="product-card">
-      <h3>Explosion Box</h3>
-      <p class="price">₹799</p>
-      <button>Add to Cart</button>
+  <div class="scroll-wrapper">
+    <button
+      class="scroll-btn left"
+      (click)="scrollSection('bestsellers-grid', 'left')"
+      aria-label="Scroll left"
+    >
+      <span>&larr;</span>
+    </button>
+    <div class="product-grid" id="bestsellers-grid">
+      @for (product of bestSellers(); track product.id) {
+        <div class="product-card" (click)="viewProduct(product.id)">
+          <div class="product-image-wrapper">
+            <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+            <button
+              class="wishlist-btn"
+              [class.active]="isInWishlist(product.id)"
+              (click)="toggleWishlist(product, $event)"
+              aria-label="Add to wishlist"
+            >
+              @if (isInWishlist(product.id)) {
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                  />
+                </svg>
+              } @else {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              }
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-price">₹{{ product.price }}</p>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-cart" (click)="addToCart(product, $event)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                />
+              </svg>
+              Add to Cart
+            </button>
+            <button class="btn btn-buy" (click)="buyNow(product, $event)">Buy Now</button>
+          </div>
+        </div>
+      }
     </div>
-    <div class="product-card">
-      <h3>Photo Lamp</h3>
-      <p class="price">₹999</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h3>Chocolate Bouquet</h3>
-      <p class="price">₹599</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h3>Custom Mug</h3>
-      <p class="price">₹349</p>
-      <button>Add to Cart</button>
-    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollSection('bestsellers-grid', 'right')"
+      aria-label="Scroll right"
+    >
+      <span>&rarr;</span>
+    </button>
   </div>
 </section>
+
 <section class="new-arrivals">
   <h2>New Arrivals</h2>
+  <div class="scroll-wrapper">
+    <button
+      class="scroll-btn left"
+      (click)="scrollSection('new-arrivals-grid', 'left')"
+      aria-label="Scroll left"
+    >
+      <span>&larr;</span>
+    </button>
+    <div class="product-grid" id="new-arrivals-grid">
+      @for (product of newArrivals(); track product.id) {
+        <div class="product-card" (click)="viewProduct(product.id)">
+          <div class="product-image-wrapper">
+            <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+            <button
+              class="wishlist-btn"
+              [class.active]="isInWishlist(product.id)"
+              (click)="toggleWishlist(product, $event)"
+              aria-label="Add to wishlist"
+            >
+              @if (isInWishlist(product.id)) {
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                  />
+                </svg>
+              } @else {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              }
+            </button>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-price">₹{{ product.price }}</p>
+          </div>
+          <div class="product-actions">
+            <button class="btn btn-cart" (click)="addToCart(product, $event)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+                />
+              </svg>
+              Add to Cart
+            </button>
+            <button class="btn btn-buy" (click)="buyNow(product, $event)">Buy Now</button>
+          </div>
+        </div>
+      }
+    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollSection('new-arrivals-grid', 'right')"
+      aria-label="Scroll right"
+    >
+      <span>&rarr;</span>
+    </button>
+  </div>
+</section>
+
+<section class="gifts-by-occasions">
+  <h2>Gifts by Occasions</h2>
+  <div class="scroll-wrapper categories">
+    <button
+      class="scroll-btn left"
+      (click)="scrollSection('occasion-category-grid', 'left')"
+      aria-label="Scroll left"
+    >
+      <span>&larr;</span>
+    </button>
+    <div class="category-grid" id="occasion-category-grid">
+      @for (cat of occasionCategories; track cat.label) {
+        <div class="category-card" (click)="navigateToCategory(cat.route)">
+          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <div class="category-label">{{ cat.label }}</div>
+        </div>
+      }
+    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollSection('occasion-category-grid', 'right')"
+      aria-label="Scroll right"
+    >
+      <span>&rarr;</span>
+    </button>
+  </div>
+</section>
+
+<section class="gifts-by-relationships">
+  <h2>Gifts by Relationships</h2>
+  <div class="scroll-wrapper categories">
+    <button
+      class="scroll-btn left"
+      (click)="scrollSection('relationship-category-grid', 'left')"
+      aria-label="Scroll left"
+    >
+      <span>&larr;</span>
+    </button>
+    <div class="category-grid" id="relationship-category-grid">
+      @for (cat of relationshipCategories; track cat.label) {
+        <div class="category-card" (click)="navigateToCategory(cat.route)">
+          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <div class="category-label">{{ cat.label }}</div>
+        </div>
+      }
+    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollSection('relationship-category-grid', 'right')"
+      aria-label="Scroll right"
+    >
+      <span>&rarr;</span>
+    </button>
+  </div>
+</section>
+
+<section class="gifts-by-festivals">
+  <h2>Gifts by Festivals</h2>
+  <div class="scroll-wrapper categories">
+    <button
+      class="scroll-btn left"
+      (click)="scrollSection('festival-category-grid', 'left')"
+      aria-label="Scroll left"
+    >
+      <span>&larr;</span>
+    </button>
+    <div class="category-grid" id="festival-category-grid">
+      @for (cat of festivalCategories; track cat.label) {
+        <div class="category-card" (click)="navigateToCategory(cat.route)">
+          <div class="category-icon">{{ cat.label.charAt(0) }}</div>
+          <div class="category-label">{{ cat.label }}</div>
+        </div>
+      }
+    </div>
+    <button
+      class="scroll-btn right"
+      (click)="scrollSection('festival-category-grid', 'right')"
+      aria-label="Scroll right"
+    >
+      <span>&rarr;</span>
+    </button>
+  </div>
+</section>
+
+<section class="personalized-gifts">
+  <h2>Personalized Gifts</h2>
   <div class="product-grid">
-    <div class="product-card">
-      <h3>New Arrival 1</h3>
-      <p class="price">₹499</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h3>New Arrival 2</h3>
-      <p class="price">₹599</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h3>New Arrival 3</h3>
-      <p class="price">₹699</p>
-      <button>Add to Cart</button>
-    </div>
-    <div class="product-card">
-      <h3>New Arrival 4</h3>
-      <p class="price">₹799</p>
-      <button>Add to Cart</button>
-    </div>
+    @for (product of giftsByPersonalized(); track product.id) {
+      <div class="product-card" (click)="viewProduct(product.id)">
+        <div class="product-image-wrapper">
+          <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
+          <button
+            class="wishlist-btn"
+            [class.active]="isInWishlist(product.id)"
+            (click)="toggleWishlist(product, $event)"
+            aria-label="Add to wishlist"
+          >
+            @if (isInWishlist(product.id)) {
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+                />
+              </svg>
+            } @else {
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            }
+          </button>
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">{{ product.name }}</h3>
+          <p class="product-price">₹{{ product.price }}</p>
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-cart" (click)="addToCart(product, $event)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
+              />
+            </svg>
+            Add to Cart
+          </button>
+          <button class="btn btn-buy" (click)="buyNow(product, $event)">Buy Now</button>
+        </div>
+      </div>
+    }
   </div>
 </section>

@@ -9,6 +9,22 @@ export class CartService {
     return this.items;
   }
 
+  updateQuantity(productId: number, quantity: number): void {
+    const nextQty = Math.max(1, quantity);
+    const item = this.items.find((i) => i.productId === productId);
+    if (!item) {
+      return;
+    }
+    item.quantity = nextQty;
+  }
+
+  removeItem(productId: number): void {
+    const index = this.items.findIndex((i) => i.productId === productId);
+    if (index >= 0) {
+      this.items.splice(index, 1);
+    }
+  }
+
   addItem(item: CartItem): void {
     this.items.push(item);
   }

@@ -1,0 +1,24 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" fill="#ffffff"/>
+  <circle cx="100" cy="100" r="86" fill="#ffffff" stroke="#d8c7c7" stroke-width="4"/>
+  <defs>
+    <linearGradient id="decor-wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff5ec"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect x="38" y="54" width="124" height="96" rx="16" fill="url(#decor-wall)"/>
+  <rect x="74" y="114" width="52" height="24" rx="6" fill="#ffe9c9" stroke="#c79c5b" stroke-width="3"/>
+  <path d="M76 114c0-14 12-26 24-26s24 12 24 26" fill="#fefefe" stroke="#c79c5b" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="88" y="100" width="12" height="12" rx="3" fill="#d9f2ff" stroke="#2c1810" stroke-width="2"/>
+  <rect x="104" y="100" width="12" height="12" rx="3" fill="#ffd7df" stroke="#2c1810" stroke-width="2"/>
+  <path d="M70 138h60" stroke="#c79c5b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M76 84h48v18H76z" fill="#ffffff" stroke="#2c1810" stroke-width="3"/>
+  <path d="M100 66l26 18" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 66l-26 18" stroke="#e24b67" stroke-width="3" stroke-linecap="round"/>
+  <rect x="88" y="86" width="12" height="10" rx="2" fill="#ffe9c9"/>
+  <rect x="100" y="86" width="12" height="10" rx="2" fill="#d9f2ff"/>
+  <circle cx="64" cy="96" r="6" fill="#ff6b6b" opacity="0.9"/>
+  <circle cx="136" cy="96" r="6" fill="#ffb86b" opacity="0.9"/>
+  <path d="M56 146h88" stroke="#d8c7c7" stroke-width="3" stroke-linecap="round"/>
+</svg>

@@ -1,5 +1,266 @@
-<!-- Checkout Page Content -->
 <div class="checkout-container">
-  <h1>Checkout</h1>
-  <!-- Checkout form will be rendered here -->
+  <section class="checkout-hero">
+    <p class="eyebrow">Secure checkout</p>
+    <h1>Complete your order</h1>
+    <p class="subhead">
+      Confirm your details and choose the payment method that works best for you. Orders ship
+      gift-ready.
+    </p>
+    <div class="hero-badges">
+      <span class="pill">SSL protected</span>
+      <span class="pill">Free gift wrap</span>
+      <span class="pill">Easy returns</span>
+    </div>
+  </section>
+
+  <section class="checkout-grid">
+    @if (!submitted) {
+      <aside class="summary-card" aria-label="Order summary">
+        <div class="summary-header">
+          <p class="eyebrow">Step 1</p>
+          <div>
+            <h3>Order summary</h3>
+            <p class="helper">Review items and charges before paying.</p>
+          </div>
+          <button type="button" class="coupon-link" (click)="toggleCouponModal()">
+            Apply coupon
+          </button>
+        </div>
+
+        @if (items.length) {
+          <div class="summary-list">
+            @for (item of items; track item.productId) {
+              <div class="summary-item">
+                <div class="summary-item-main">
+                  <p class="item-name">{{ item.productName }}</p>
+                  <p class="item-meta">
+                    Qty {{ item.quantity }} · ₹{{ item.price | number: '1.0-0' }}
+                  </p>
+                  <div class="qty-row">
+                    <div class="quantity-controls" aria-label="Update quantity">
+                      <button
+                        type="button"
+                        class="qty-btn"
+                        aria-label="Decrease quantity"
+                        (click)="decreaseQuantity(item)"
+                      >
+                        −
+                      </button>
+                      <span class="qty-value" aria-live="polite">{{ item.quantity }}</span>
+                      <button
+                        type="button"
+                        class="qty-btn"
+                        aria-label="Increase quantity"
+                        (click)="increaseQuantity(item)"
+                      >
+                        +
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      class="remove-btn"
+                      aria-label="Remove {{ item.productName }} from cart"
+                      (click)="removeItem(item.productId)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+                <p class="item-total">₹{{ item.price * item.quantity | number: '1.0-0' }}</p>
+              </div>
+            }
+          </div>
+
+          <div class="summary-row">
+            <span>Subtotal ({{ itemCount }} items)</span>
+            <span>₹{{ subtotal | number: '1.0-0' }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery</span>
+            <span>₹{{ deliveryFee | number: '1.0-0' }}</span>
+          </div>
+          <div class="coupon-cta">
+            <div>
+              <p class="coupon-cta-title">
+                {{ discountPercent > 0 ? 'Coupon applied' : 'Have a coupon?' }}
+              </p>
+              @if (discountPercent > 0) {
+                <p class="coupon-cta-note">{{ appliedCoupon }} is active. You can change it.</p>
+              } @else {
+                <p class="coupon-cta-note">Tap apply to add Flat10 / Flat15 / Flat30.</p>
+              }
+            </div>
+            <button type="button" class="coupon-cta-btn" (click)="toggleCouponModal()">
+              {{ discountPercent > 0 ? 'Change coupon' : 'Apply coupon' }}
+            </button>
+          </div>
+          @if (discountPercent > 0) {
+            <div class="summary-row discount">
+              <span>Discount {{ appliedCoupon ? '(' + appliedCoupon + ')' : '' }}</span>
+              <span>-₹{{ discountAmount | number: '1.0-0' }}</span>
+            </div>
+          }
+          <div class="summary-row total">
+            <span>Payable today</span>
+            <span>₹{{ payableTotal | number: '1.0-0' }}</span>
+          </div>
+        } @else {
+          <div class="empty-state">
+            <h4>Your cart is empty</h4>
+            <p>Add a few favourites to see them here.</p>
+            <a routerLink="/shop" class="ghost-btn">Browse gifts</a>
+          </div>
+        }
+
+        <div class="summary-footnotes">
+          <span>Contactless delivery available</span>
+          <span>Secure payments powered by Razorpay</span>
+        </div>
+      </aside>
+
+      <form (ngSubmit)="submitOrder()" #checkoutForm="ngForm" class="checkout-form" novalidate>
+        <div class="form-card">
+          <div class="form-heading">
+            <div>
+              <p class="eyebrow">Step 2</p>
+              <h2>Recipient details</h2>
+              <p class="helper">We use this to update you about delivery.</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input
+              id="name"
+              name="name"
+              [(ngModel)]="info.name"
+              placeholder="Riya Kumari"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="address">Delivery address</label>
+            <textarea
+              id="address"
+              name="address"
+              [(ngModel)]="info.address"
+              placeholder="House number, street, city, pincode"
+              required
+            ></textarea>
+            <p class="helper">We deliver across India with trusted partners.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="paymentMethod">Payment method</label>
+            <select id="paymentMethod" name="paymentMethod" [(ngModel)]="info.paymentMethod">
+              <option value="cod">Cash on delivery</option>
+              <option value="upi">UPI</option>
+              <option value="card">Credit / Debit card</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="submit-btn" type="submit" [disabled]="!checkoutForm.form.valid">
+          Place order securely
+        </button>
+      </form>
+    } @else {
+      <div class="order-success" aria-live="polite">
+        <div class="success-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5" />
+            <path d="M7 12.5l3 2.5 6-6" stroke="currentColor" stroke-width="1.7" fill="none" />
+          </svg>
+        </div>
+        <h2>Thank you for your order!</h2>
+        <p>We’re packing it already. You’ll get tracking updates via SMS and email.</p>
+      </div>
+    }
+  </section>
+
+  @if (showCouponModal) {
+    <div class="coupon-modal" role="dialog" aria-modal="true" aria-label="Apply coupon">
+      <div class="coupon-card">
+        <div class="coupon-header">
+          <div>
+            <p class="eyebrow">Offers</p>
+            <h3>Pick a coupon</h3>
+          </div>
+          <button type="button" class="close-btn" aria-label="Close" (click)="toggleCouponModal()">
+            ×
+          </button>
+        </div>
+
+        <div class="coupon-options">
+          <label class="coupon-option">
+            <input
+              type="radio"
+              name="coupon"
+              value="Flat10"
+              [(ngModel)]="selectedCoupon"
+              (change)="couponInput = ''"
+            />
+            <div>
+              <p class="coupon-name">Flat10</p>
+              <p class="coupon-desc">10% off on orders above ₹999</p>
+            </div>
+          </label>
+          <label class="coupon-option">
+            <input
+              type="radio"
+              name="coupon"
+              value="Flat15"
+              [(ngModel)]="selectedCoupon"
+              (change)="couponInput = ''"
+            />
+            <div>
+              <p class="coupon-name">Flat15</p>
+              <p class="coupon-desc">15% off on orders above ₹1999</p>
+            </div>
+          </label>
+          <label class="coupon-option">
+            <input
+              type="radio"
+              name="coupon"
+              value="Flat30"
+              [(ngModel)]="selectedCoupon"
+              (change)="couponInput = ''"
+            />
+            <div>
+              <p class="coupon-name">Flat30</p>
+              <p class="coupon-desc">30% off on orders above ₹2999</p>
+            </div>
+          </label>
+        </div>
+
+        <div class="coupon-input">
+          <label for="coupon-code">Have another code?</label>
+          <div class="coupon-input-row">
+            <input
+              id="coupon-code"
+              name="coupon-code"
+              [(ngModel)]="couponInput"
+              (input)="selectedCoupon = ''"
+              placeholder="Enter coupon code"
+            />
+            <button
+              type="button"
+              class="apply-btn"
+              [class.disabled]="!isCouponEligible"
+              [disabled]="!isCouponEligible"
+              (click)="applyCoupon()"
+            >
+              Apply
+            </button>
+          </div>
+          @if (couponMessage) {
+            <p class="coupon-message">{{ couponMessage }}</p>
+          } @else if (!isCouponEligible && pendingCoupon) {
+            <p class="coupon-hint">Add ₹{{ couponShortfall }} more to use this coupon.</p>
+          }
+        </div>
+      </div>
+    </div>
+  }
 </div>
