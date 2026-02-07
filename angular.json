@@ -91,7 +91,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/Gifting/",
+            "baseHref": "/Giftory/",
             "buildTarget": "gifting-ecommerce:build:production"
           }
         }
