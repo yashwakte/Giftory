@@ -159,19 +159,7 @@
         <span class="badge wishlist-badge">{{ wishlistService.wishlistCount() }}</span>
       }
     </a>
-    <a routerLink="/checkout" class="icon-btn" aria-label="Checkout" (click)="closeMobileNav()">
-      <span class="icon-circle" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M6.375 4.5a1.125 1.125 0 00-1.09.875L4.01 12.1a2.625 2.625 0 002.565 3.15h9.53l-.252 1.26a.75.75 0 101.472.294l.315-1.575 1.35-6.75A1.5 1.5 0 0017.505 6H6.706l.19-1.05H18a.75.75 0 000-1.5H6.375zM7.5 18.75a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0zm7.5 0a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-          />
-        </svg>
-      </span>
-      @if (cartService.itemCount() > 0) {
-        <span class="badge">{{ cartService.itemCount() }}</span>
-      }
-    </a>
-    <a routerLink="/cart" class="icon-btn cart-quick" aria-label="Cart" (click)="closeMobileNav()">
+    <a routerLink="/cart" class="icon-btn" aria-label="Cart" (click)="closeMobileNav()">
       <span class="icon-circle" aria-hidden="true">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CheckoutService } from './services/checkout.service';
 import { CheckoutInfo } from './models/checkout-info.model';
 import { Router, RouterModule } from '@angular/router';
@@ -21,6 +21,7 @@ export class CheckoutComponent {
   private router = inject(Router);
 
   items: CartItem[] = this.cartService.getItems();
+  selectedItems = signal<Set<number>>(new Set(this.items.map((item) => item.productId)));
   info: CheckoutInfo = {
     name: '',
     address: '',
@@ -74,15 +75,15 @@ export class CheckoutComponent {
   }
 
   get itemCount(): number {
-    return this.items.reduce((count, item) => count + (item.quantity || 0), 0);
+    return this.getSelectedItems().reduce((count, item) => count + (item.quantity || 0), 0);
   }
 
   get subtotal(): number {
-    return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
+    return this.getSelectedItems().reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
   get deliveryFee(): number {
-    return this.items.length ? 49 : 0;
+    return this.getSelectedItems().length ? 49 : 0;
   }
 
   get total(): number {
@@ -95,6 +96,26 @@ export class CheckoutComponent {
 
   get payableTotal(): number {
     return Math.max(0, this.total - this.discountAmount);
+  }
+
+  isItemSelected(productId: number): boolean {
+    return this.selectedItems().has(productId);
+  }
+
+  toggleItemSelection(productId: number): void {
+    this.selectedItems.update((selected) => {
+      const newSet = new Set(selected);
+      if (newSet.has(productId)) {
+        newSet.delete(productId);
+      } else {
+        newSet.add(productId);
+      }
+      return newSet;
+    });
+  }
+
+  getSelectedItems(): CartItem[] {
+    return this.items.filter((item) => this.selectedItems().has(item.productId));
   }
 
   private refreshItems(): void {
@@ -171,8 +192,14 @@ export class CheckoutComponent {
   }
 
   submitOrder(): void {
+    const selectedItems = this.getSelectedItems();
+    if (selectedItems.length === 0) {
+      alert('Please select at least one item to checkout');
+      return;
+    }
     this.checkoutService.submitOrder(this.info);
-    this.cartService.clearCart();
+    // Remove only selected items from cart
+    selectedItems.forEach((item) => this.cartService.removeItem(item.productId));
     this.items = [];
     this.submitted = true;
     setTimeout(() => this.router.navigate(['/']), 2000);
